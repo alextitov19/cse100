@@ -45,11 +45,6 @@ int main(int argc, char **argv)
         cin >> arr[i];
     }
 
-    for (int i = 0; i < arraySize; i++)
-    {
-        cout << "Array value at index " << i << " is " << arr[i] << endl;
-    }
-
     int *sortedArray = new int[1];
     sortedArray[0] = arr[0];
 
@@ -58,7 +53,8 @@ int main(int argc, char **argv)
         sortedArray = insertFunction(sortedArray, arr[i], i);
         for (int j = 0; j <= i; j++)
         {
-            cout << "Sorted array value at index " << j << " is " << sortedArray[j] << endl;
+            cout << sortedArray[j] << ";";
         }
+        cout << endl;
     }
 }
