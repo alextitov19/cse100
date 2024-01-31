@@ -4,26 +4,55 @@
 
 using namespace std;
 
-int main(int argc, char **argv) {
+void insertFunction(int *array, int value)
+{
+    int length = sizeof(array) / 2;
+    int *sortedArray = new int[length + 1];
+    int j = 0;
+    bool added = false;
+    for (int i = 0; i < length; i++)
+    {
+        if (array[i] < value || added)
+        {
+            sortedArray[j] = array[i];
+        }
+        else
+        {
+            sortedArray[j] = value;
+            j++;
+            added = true;
+            sortedArray[j] = array[i];
+        }
+        j++;
+    }
+    if (!added)
+    {
+        sortedArray[length] = value;
+    }
+    for (int i = 0; i <= length; i++)
+    {
+        cout << "Sorted array" << sortedArray[i] << endl;
+    }
+    return;
+}
+
+int main(int argc, char **argv)
+{
     // Populate the array
-    int* arr;
-    int arraySize = 1;
+    int arraySize = 0;
 
     cin >> arraySize;
-    arr = new int[arraySize];
+    int *arr = new int[arraySize];
 
-    for(int i=0; i<arraySize; i++) {
+    for (int i = 0; i < arraySize; i++)
+    {
         cin >> arr[i];
     }
 
-    int* sorted = new int[arraySize];  
-    sorted[0] = arr[0];
-    // Loop over the initial array, sorting the elements
-    for (int i=1; i<arraySize; i++) {
-        int current = arr[i];
-        for(int j = 0; j < i; j++) {
-            
-        }
-    }    
+    for (int i = 0; i < arraySize; i++)
+    {
+        cout << "Array value at index " << i << " is " << arr[i] << endl;
+    }
 
+    insertFunction(arr, 5);
 }
