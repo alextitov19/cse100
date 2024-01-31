@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void insertFunction(int *array, int value, int length)
+int *insertFunction(int *array, int value, int length)
 {
     int *sortedArray = new int[length + 1];
     int j = 0;
@@ -28,11 +28,8 @@ void insertFunction(int *array, int value, int length)
     {
         sortedArray[length] = value;
     }
-    for (int i = 0; i <= length; i++)
-    {
-        cout << "Sorted array value at index " << i << " is " << sortedArray[i] << endl;
-    }
-    return;
+
+    return sortedArray;
 }
 
 int main(int argc, char **argv)
@@ -56,5 +53,12 @@ int main(int argc, char **argv)
     int *sortedArray = new int[1];
     sortedArray[0] = arr[0];
 
-    insertFunction(sortedArray, arr[1], 1);
+    for (int i = 1; i < arraySize; i++)
+    {
+        sortedArray = insertFunction(sortedArray, arr[i], i);
+        for (int j = 0; j <= i; j++)
+        {
+            cout << "Sorted array value at index " << j << " is " << sortedArray[j] << endl;
+        }
+    }
 }
