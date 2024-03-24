@@ -21,6 +21,10 @@ void countingSort(int **arr, int size, int column)
         int index = arr[i][column];
         counters[index] += 1;
     }
+    for (int i = 1; i < 4; i++)
+    {
+        counters[i] += counters[i - 1];
+    }
     cout << counters[0] << " " << counters[1] << " " << counters[2] << " " << counters[3] << endl;
 }
 
@@ -39,8 +43,8 @@ int main(int argc, char **argv)
     }
 
     countingSort(arr, size, 0);
-    countingSort(arr, size, 1);
-    countingSort(arr, size, 2);
+    // countingSort(arr, size, 1);
+    // countingSort(arr, size, 2);
 
     printArr(arr, size);
 }
