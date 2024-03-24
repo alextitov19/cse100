@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Node structure for linked list
 struct Node
 {
     int key;
@@ -12,7 +11,6 @@ struct Node
     Node(int k) : key(k), next(nullptr) {}
 };
 
-// Chained hash table class
 class ChainedHashTable
 {
 private:
@@ -20,13 +18,11 @@ private:
     int size;
 
 public:
-    // Constructor to initialize hash table with given size
     ChainedHashTable(int m) : size(m)
     {
         table.resize(size, nullptr);
     }
 
-    // Destructor to free memory
     ~ChainedHashTable()
     {
         for (int i = 0; i < size; ++i)
@@ -41,13 +37,11 @@ public:
         }
     }
 
-    // Hash function
     int hash(int key)
     {
         return key % size;
     }
 
-    // Insert operation
     void insert(int key)
     {
         int index = hash(key);
@@ -56,7 +50,6 @@ public:
         table[index] = newNode;
     }
 
-    // Delete operation
     void remove(int key)
     {
         int index = hash(key);
@@ -85,7 +78,6 @@ public:
         }
     }
 
-    // Search operation
     void search(int key)
     {
         int index = hash(key);
@@ -108,7 +100,6 @@ public:
         }
     }
 
-    // Output operation
     void output()
     {
         for (int i = 0; i < size; ++i)
@@ -129,7 +120,7 @@ int main()
 {
     int m;
     cin >> m;
-    cin.ignore(); // Clear the newline character from input buffer
+    cin.ignore();
     ChainedHashTable hashTable(m);
     string line;
 
