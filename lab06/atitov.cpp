@@ -1,50 +1,57 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
 
-void printArr(int **arr, int size)
+void counting_sort(vector<vector<int>> &arr, int exp)
 {
-    for (int i = 0; i < size; i++)
+    int n = arr.size();
+    vector<vector<int>> output(n, vector<int>(10));
+    vector<int> count(4, 0);
+
+    for (int i = 0; i < n; ++i)
+        count[arr[i][exp] % 4]++;
+
+    for (int i = 1; i < 4; ++i)
+        count[i] += count[i - 1];
+
+    for (int i = n - 1; i >= 0; --i)
     {
-        for (int j = 0; j < 10; j++)
+        output[count[arr[i][exp] % 4] - 1] = arr[i];
+        count[arr[i][exp] % 4]--;
+    }
+
+    for (int i = 0; i < n; ++i)
+        arr[i] = output[i];
+}
+
+void radix_sort(vector<vector<int>> &vectors)
+{
+    for (int exp = 9; exp >= 0; --exp)
+        counting_sort(vectors, exp);
+}
+
+int main()
+{
+    int num_vectors;
+    cin >> num_vectors;
+    vector<vector<int>> vectors(num_vectors, vector<int>(10));
+
+    for (int i = 0; i < num_vectors; ++i)
+        for (int j = 0; j < 10; ++j)
+            cin >> vectors[i][j];
+
+    radix_sort(vectors);
+
+    for (const auto &vec : vectors)
+    {
+        for (int i = 0; i < 10; ++i)
         {
-            cout << arr[i][j] << ";";
+            cout << vec[i] << ";";
         }
         cout << endl;
     }
-}
 
-void countingSort(int **arr, int size, int column)
-{
-    int counters[] = {0, 0, 0, 0};
-    for (int i = 0; i < size; i++)
-    {
-        int index = arr[i][column];
-        counters[index] += 1;
-    }
-    for (int i = 1; i < 4; i++)
-    {
-        counters[i] += counters[i - 1];
-    }
-    cout << counters[0] << " " << counters[1] << " " << counters[2] << " " << counters[3] << endl;
-}
-
-int main(int argc, char **argv)
-{
-    int size;
-    cin >> size;
-    int **arr = new int *[size];
-    for (int i = 0; i < size; i++)
-    {
-        arr[i] = new int[10];
-        for (int j = 0; j < 10; j++)
-        {
-            cin >> arr[i][j];
-        }
-    }
-
-    countingSort(arr, size, 0);
-    // countingSort(arr, size, 1);
-    // countingSort(arr, size, 2);
-
-    printArr(arr, size);
+    return 0;
 }
