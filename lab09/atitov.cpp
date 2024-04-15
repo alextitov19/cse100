@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Function to perform matrix chain multiplication
 void printSequence(vector<vector<int>> &brackets, int i, int j)
 {
     if (i == j)
@@ -22,15 +21,13 @@ void printSequence(vector<vector<int>> &brackets, int i, int j)
 
 void matrixChainMultiplication(vector<int> &dimensions)
 {
-    int n = dimensions.size() - 1;                      // Number of matrices
-    vector<vector<int>> dp(n, vector<int>(n, 0));       // Dynamic programming table
-    vector<vector<int>> brackets(n, vector<int>(n, 0)); // Table to store optimal parenthesis placement
+    int n = dimensions.size() - 1;
+    vector<vector<int>> dp(n, vector<int>(n, 0));
+    vector<vector<int>> brackets(n, vector<int>(n, 0));
 
-    // Initialize dp table with INT_MAX
     for (int i = 0; i < n; ++i)
         dp[i][i] = 0;
 
-    // Compute minimum number of scalar multiplications
     for (int len = 2; len <= n; ++len)
     {
         for (int i = 0; i < n - len + 1; ++i)
@@ -49,10 +46,8 @@ void matrixChainMultiplication(vector<int> &dimensions)
         }
     }
 
-    // Print minimum number of scalar multiplications
     cout << dp[0][n - 1] << endl;
 
-    // Print matrix multiplication sequence
     printSequence(brackets, 0, n - 1);
 }
 
